@@ -18,23 +18,18 @@ function countdownTimer(startTime, interval) {
   // Stop the timer when time reaches 0
   // Return the timer ID for validation
 }
-
-module.exports = { countdownTimer };
-
 function countdownTimer(startTime, interval) {
   // Initialize the remaining time
   let remainingTime = startTime;
 
   // Set up a timer using setInterval
   const timerId = setInterval(() => {
-    console.log(`Remaining time: ${remainingTime}`);
-
-    remainingTime--;
-
-    // Stop the timer when time reaches 0
-    if (remainingTime < 0) {
-      clearInterval(timerId);
+    if (remainingTime > 0) {
+      console.log(`Remaining time: ${remainingTime} seconds`);
+      remainingTime--;
+    } else {
       console.log("Countdown finished!");
+      clearInterval(timerId); // Stop the timer when time reaches 0
     }
   }, interval);
 
@@ -44,39 +39,19 @@ function countdownTimer(startTime, interval) {
 
 module.exports = { countdownTimer };
 
-function startCountdown(seconds) {
-  let remainingTime = seconds;
-
-  const countdownInterval = setInterval(() => {
-    console.log(`Time remaining: ${remainingTime} seconds`);
-
-    remainingTime--;
-
-    if (remainingTime < 0) {
-      clearInterval(countdownInterval);
-      console.log("⏰ Countdown finished!");
-    }
-  }, 1000);
-}
-
-// Example usage
-startCountdown(5);
-
 function countdownTimer(seconds) {
-  let remainingTime = seconds;
+  let remaining = seconds;
 
   const timerId = setInterval(() => {
-    console.log(`Remaining time: ${remainingTime}`);
+    console.log(remaining);
+    remaining--;
 
-    remainingTime--;
-
-    if (remainingTime < 0) {
+    if (remaining < 0) {
       clearInterval(timerId);
-      console.log("Countdown complete!");
     }
   }, 1000);
 
-  return timerId; // ✅ Required for test validation
+  return timerId;
 }
 
-const timer = countdownTimer(5);
+module.exports = countdownTimer;
